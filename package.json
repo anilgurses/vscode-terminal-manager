@@ -3,11 +3,12 @@
 	"displayName": "Terminal Manager",
 	"description": "Manage all terminals",
 	"version": "0.0.1",
-	"publisher": "esef.berfu",
+	"publisher": "esef-berfu",
 	"enableProposedApi": true,
 	"engines": {
 		"vscode": "^1.46.0"
 	},
+	"repository": "https://github.com/esefberfu/vscode-terminal-manager",
 	"categories": [
 		"Other"
 	],
