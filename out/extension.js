@@ -12,6 +12,12 @@ function activate(context) {
     vscode.commands.registerCommand('terminalManager.editTerminal', (terminal) => terminalManagerProvider.renameTerminal(terminal));
     vscode.commands.registerCommand('terminalManager.deleteTerminal', (terminal) => terminalManagerProvider.closeTerminal(terminal));
     vscode.commands.registerCommand('terminalManager.showTerminal', (terminal) => terminalManagerProvider.showTerminal(terminal));
+    vscode.window.onDidOpenTerminal((terminal) => {
+        terminalManagerProvider.refresh();
+    });
+    vscode.window.onDidCloseTerminal((terminal) => {
+        terminalManagerProvider.refresh();
+    });
 }
 exports.activate = activate;
 //# sourceMappingURL=extension.js.map

@@ -9,6 +9,7 @@ export class TerminalManagerProvider implements vscode.TreeDataProvider<Terminal
 	readonly onDidChangeTreeData: vscode.Event<Terminal | undefined | void> = this._onDidChangeTreeData.event;
 
 	constructor(private workspaceRoot: string) {
+		
 	}
 
 	refresh(): void {
@@ -21,13 +22,18 @@ export class TerminalManagerProvider implements vscode.TreeDataProvider<Terminal
 		});
 		await this.fullScreen();
 
-		const terminal = vscode.window.createTerminal(input, vscode.workspace.rootPath);
+		const terminal = vscode.window.createTerminal({
+			shellPath:'/bin/zsh',
+			shellArgs:[],
+			name: input
+		});
 		terminal.show(true);
 		this.refresh();
 	}
 
 	async closeTerminal(terminal: Terminal): Promise<void> {
 		terminal.vsTerminal.dispose();
+		this.refresh();
 	}
 
 	async showTerminal(terminal: Terminal): Promise<void> {

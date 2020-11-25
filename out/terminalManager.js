@@ -17,12 +17,17 @@ class TerminalManagerProvider {
             placeHolder: 'Enter name of the terminal:'
         });
         await this.fullScreen();
-        const terminal = vscode.window.createTerminal(input, vscode.workspace.rootPath);
+        const terminal = vscode.window.createTerminal({
+            shellPath: '/bin/zsh',
+            shellArgs: [],
+            name: input
+        });
         terminal.show(true);
         this.refresh();
     }
     async closeTerminal(terminal) {
         terminal.vsTerminal.dispose();
+        this.refresh();
     }
     async showTerminal(terminal) {
         terminal.vsTerminal.show(true);
