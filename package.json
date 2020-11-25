@@ -47,7 +47,11 @@
 			},
 			{
 				"command": "terminalManager.createTerminal",
-				"title": "Add"
+				"title": "Add",
+				"icon":{
+					"light": "resources/light/add.svg",
+					"dark": "resources/dark/add.svg"
+				}
 			},
 			{
 				"command": "terminalManager.deleteTerminal",
@@ -71,7 +75,8 @@
 				},
 				{
 					"command": "terminalManager.createTerminal",
-					"when": "view == terminalManager"
+					"when": "view == terminalManager",
+					"group": "navigation"
 				}
 			],
 			"view/item/context": [

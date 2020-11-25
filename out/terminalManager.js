@@ -20,7 +20,7 @@ class TerminalManagerProvider {
         const terminal = vscode.window.createTerminal({
             shellPath: '/bin/zsh',
             shellArgs: [],
-            name: input
+            name: (input) ? input : 'Terminal'
         });
         terminal.show(true);
         this.refresh();
