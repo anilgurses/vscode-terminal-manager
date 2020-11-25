@@ -1,1 +1,1 @@
-# vscode-terminal-manager
+vscode-terminal-manager
