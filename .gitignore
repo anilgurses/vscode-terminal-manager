@@ -11,3 +11,4 @@
 node_modules
 .DS_Store
 package-lock.json
+terminal-manager-0.0.1.vsix
