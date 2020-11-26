@@ -2,7 +2,7 @@
 	"name": "terminal-manager",
 	"displayName": "Terminal Manager",
 	"description": "Manage all terminals",
-	"version": "0.0.1",
+	"version": "1.1.0",
 	"publisher": "esef-berfu",
 	"enableProposedApi": true,
 	"engines": {
@@ -48,7 +48,7 @@
 			{
 				"command": "terminalManager.createTerminal",
 				"title": "Add",
-				"icon":{
+				"icon": {
 					"light": "resources/light/add.svg",
 					"dark": "resources/dark/add.svg"
 				}
@@ -56,7 +56,7 @@
 			{
 				"command": "terminalManager.deleteTerminal",
 				"title": "Delete",
-				"icon":{
+				"icon": {
 					"light": "resources/light/delete.svg",
 					"dark": "resources/dark/delete.svg"
 				}
