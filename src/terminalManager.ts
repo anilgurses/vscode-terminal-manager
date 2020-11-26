@@ -1,7 +1,12 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import * as util from 'util';
 import * as path from 'path';
 import {Terminal as VSTerminal} from 'vscode';
+
+const os = require('os');
+const readFile = util.promisify(fs.readFile);
+const writeFIle = util.promisify(fs.readFile);
 
 export class TerminalManagerProvider implements vscode.TreeDataProvider<Terminal> {
 
@@ -14,21 +19,38 @@ export class TerminalManagerProvider implements vscode.TreeDataProvider<Terminal
 
 	refresh(): void {
 		this._onDidChangeTreeData.fire();
+		console.log('OS:', os.platform());
 	}
 
-	async createTerminal(): Promise<void> {
+	async runOnTerminal(uri:vscode.Uri): Promise<void> {
+		console.log('URI: ', uri.fsPath)
+		let terminal = await this.createTerminal();
+		let cmd = await readFile(uri.fsPath);
+		terminal.sendText(cmd.toString());
+	}
+
+	async createTerminal(): Promise<VSTerminal> {
 		const input = await vscode.window.showInputBox({
 			placeHolder:'Enter name of the terminal:'
 		});
 		await this.fullScreen();
 
+		let shellPath = '';
+		if(os.platform() === 'darwin')
+			shellPath = '/bin/zsh';
+		else if(os.platform() === 'linux')
+			shellPath = '/bin/bash';
+		else if(os.platform() === 'win32')
+			shellPath = 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe';
+
 		const terminal = vscode.window.createTerminal({
-			shellPath:'/bin/zsh',
-			shellArgs:[],
+			shellPath: shellPath,
+			shellArgs: [],
 			name: (input) ? input : 'Terminal'
 		});
 		terminal.show(true);
 		this.refresh();
+		return terminal;
 	}
 
 	async closeTerminal(terminal: Terminal): Promise<void> {
@@ -59,6 +81,8 @@ export class TerminalManagerProvider implements vscode.TreeDataProvider<Terminal
 			return new Terminal((i+1).toString()+'. '+t.name, '', t, vscode.TreeItemCollapsibleState.None);
 		}));
 	}
+
+	
 }
 
 export class Terminal extends vscode.TreeItem {

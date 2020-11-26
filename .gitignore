@@ -11,4 +11,5 @@
 node_modules
 .DS_Store
 package-lock.json
+eterminal-manager-0.0.1.vsix
 terminal-manager-0.0.1.vsix

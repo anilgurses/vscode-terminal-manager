@@ -17,6 +17,18 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"languages": [
+			{
+				"id": "command",
+				"extensions": [
+					".command"
+				],
+				"aliases": [
+					"Command",
+					"command"
+				]
+			}
+		],
 		"viewsContainers": {
 			"activitybar": [
 				{
@@ -38,6 +50,10 @@
 		},
 		"commands": [
 			{
+				"command": "terminalManager.runOnTerminal",
+				"title": "RunOnTerm"
+			},
+			{
 				"command": "terminalManager.refresh",
 				"title": "Refresh",
 				"icon": {
@@ -48,7 +64,7 @@
 			{
 				"command": "terminalManager.createTerminal",
 				"title": "Add",
-				"icon":{
+				"icon": {
 					"light": "resources/light/add.svg",
 					"dark": "resources/dark/add.svg"
 				}
@@ -56,7 +72,7 @@
 			{
 				"command": "terminalManager.deleteTerminal",
 				"title": "Delete",
-				"icon":{
+				"icon": {
 					"light": "resources/light/delete.svg",
 					"dark": "resources/dark/delete.svg"
 				}
@@ -67,6 +83,12 @@
 			}
 		],
 		"menus": {
+			"explorer/context": [
+				{
+					"command": "terminalManager.runOnTerminal",
+					"group": "MyGroup"
+				}
+			],
 			"view/title": [
 				{
 					"command": "terminalManager.refresh",
@@ -109,10 +131,11 @@
 		"eslint": "^7.1.0"
 	},
 	"dependencies": {
-		"jsonc-parser": "^0.4.2",
 		"ftp": "^0.3.10",
+		"jsonc-parser": "^0.4.2",
+		"minimist": "^0.2.1",
 		"mkdirp": "^0.5.1",
 		"rimraf": "^2.6.2",
-		"minimist": "^0.2.1"
+		"ssh2-sftp-client": "^5.3.2"
 	}
 }
