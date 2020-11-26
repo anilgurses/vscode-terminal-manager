@@ -16,10 +16,8 @@ class TerminalManagerProvider {
     }
     refresh() {
         this._onDidChangeTreeData.fire();
-        console.log('OS:', os.platform());
     }
     async runOnTerminal(uri) {
-        console.log('URI: ', uri.fsPath);
         let terminal = await this.createTerminal();
         let cmd = await readFile(uri.fsPath);
         terminal.sendText(cmd.toString());
