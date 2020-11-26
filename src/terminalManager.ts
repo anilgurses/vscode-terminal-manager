@@ -19,11 +19,9 @@ export class TerminalManagerProvider implements vscode.TreeDataProvider<Terminal
 
 	refresh(): void {
 		this._onDidChangeTreeData.fire();
-		console.log('OS:', os.platform());
 	}
 
 	async runOnTerminal(uri:vscode.Uri): Promise<void> {
-		console.log('URI: ', uri.fsPath)
 		let terminal = await this.createTerminal();
 		let cmd = await readFile(uri.fsPath);
 		terminal.sendText(cmd.toString());
